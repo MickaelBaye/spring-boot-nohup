@@ -4,3 +4,7 @@
 
 * Init spring-boot project
 
+## Nohup 0.0.2
+
+* Test run application feature with Firefox
+
