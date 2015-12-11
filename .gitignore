@@ -2,3 +2,5 @@
 target
 # Sublime text files
 *.sublime*
+# Logs
+logs/*

@@ -21,7 +21,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest({"server.port=0"})
-public class NohupControllerIT {
+public class NohupControllerITTest {
 
     @Value("${local.server.port}")
     private int port;
@@ -38,6 +38,6 @@ public class NohupControllerIT {
 	@Test
 	public void getHello() throws Exception {
 		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
-		assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
+		assertThat(response.getBody(), equalTo("Greetings from Nohup!"));
 	}
 }
