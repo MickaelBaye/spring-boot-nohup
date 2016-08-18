@@ -6,6 +6,15 @@ package nohup;
 public class NohupResponse {
 
     private String status;
+    private NohupProcess process;
+
+    public NohupProcess getProcess() {
+        return process;
+    }
+
+    public void setProcess(NohupProcess process) {
+        this.process = process;
+    }
 
     public String getStatus() {
         return status;
@@ -17,8 +26,17 @@ public class NohupResponse {
 
     @Override
     public String toString() {
+
+        String processId;
+        if (process == null) {
+            processId = null;
+        } else {
+            processId = process.getId();
+        }
+
         return "NohupResponse{" +
                 "status='" + status + '\'' +
+                ", process='" + processId + '\'' +
                 '}';
     }
 }

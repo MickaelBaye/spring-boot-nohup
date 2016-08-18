@@ -12,6 +12,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.http.converter.HttpMessageConverter;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.IOException;
 
@@ -63,11 +64,32 @@ public class NohupControllerITTest {
 	}
 
 	@Test
-	public void paramNohupShouldReturnOKHTTPStatus() throws Exception {
+	public void paramNohupNewShouldReturnOKHTTPStatus() throws Exception {
 
-		this.mockMvc.perform(post("/nohup")
-				.content(this.json(new NohupRequest()))
+        NohupRequest request = new NohupRequest();
+        request.setCommand("");
+        request.setParameters(new ArrayList<>());
+
+		this.mockMvc.perform(post("/nohup/new")
+				.content(this.json(request))
 				.contentType(contentType))
+                .andDo(print())
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	public void paramNohupGetByIdShouldReturnOKHTTPStatus() throws Exception {
+
+		this.mockMvc.perform(get("/nohup/get/toto-toto"))
+                .andDo(print())
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	public void paramNohupInterruptByIdShouldReturnOKHTTPStatus() throws Exception {
+
+		this.mockMvc.perform(get("/nohup/interrupt/toto-toto"))
+                .andDo(print())
 				.andExpect(status().isOk());
 	}
 

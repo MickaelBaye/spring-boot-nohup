@@ -16,7 +16,14 @@ public class NohupCommand {
 
         try {
             response = new NohupResponse();
+            NohupProcess process = new NohupProcess(request.getCommand(), request.getParameters());
+            Thread thread = new Thread(process);
+
+            thread.start();
+            process.setThread(thread);
+            response.setProcess(process);
             response.setStatus("OK");
+
             logger.log(Level.INFO, response.toString());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to execute nohup command !", e);
