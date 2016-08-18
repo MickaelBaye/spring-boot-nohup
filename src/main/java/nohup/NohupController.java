@@ -33,6 +33,11 @@ public class NohupController {
         return response ;
     }
 
+    @RequestMapping(value = "/get/all", method = RequestMethod.GET)
+    public Map<String, NohupProcess> nohupGetAll() {
+        return processes;
+    }
+
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public NohupResponse nohupGetById(@PathVariable String id) {
 
