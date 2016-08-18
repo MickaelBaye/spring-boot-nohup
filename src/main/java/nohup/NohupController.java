@@ -65,6 +65,7 @@ public class NohupController {
             try {
                 if (process.interrupt()) {
                     response.setStatus("OK");
+                    processes.remove(id);
                 } else {
                     response.setStatus("KO - Can not interrupt process : " + process.toString());
                     logger.log(Level.WARNING, "Can not interrupt process : " + process.toString());
