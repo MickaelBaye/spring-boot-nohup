@@ -19,6 +19,21 @@ import java.util.logging.Logger;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public class NohupProcess implements Runnable {
 
+    public enum Status {
+        RUNNING ("RUNNING"),
+        NOT_RUNNING ("NOT_RUNNING");
+
+        private String status;
+
+        Status(String status) {
+            this.status = status;
+        }
+
+        String getStatus() {
+            return this.status;
+        }
+    }
+
     @JsonIgnore
     private static Logger logger = Logger.getLogger(NohupProcess.class.getName());
     @JsonProperty
@@ -35,6 +50,8 @@ public class NohupProcess implements Runnable {
     private List<String> standardOutput;
     @JsonProperty
     private List<String> errorOutput;
+    @JsonProperty
+    private Status status;
 
     public NohupProcess(String command, List<String> parameters) {
         this.id = UUID.randomUUID().toString();
@@ -42,6 +59,7 @@ public class NohupProcess implements Runnable {
         this.parameters = parameters;
         this.standardOutput = new ArrayList<>();
         this.errorOutput = new ArrayList<>();
+        this.status = Status.NOT_RUNNING;
     }
 
     @Override
@@ -54,6 +72,7 @@ public class NohupProcess implements Runnable {
         try {
             ProcessBuilder processBuilder = new ProcessBuilder(fullCommand);
             process = processBuilder.start();
+            status = Status.RUNNING;
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to run nohup process : " + this.toString(), e);
         }
@@ -130,6 +149,19 @@ public class NohupProcess implements Runnable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Status getStatus() {
+        if (process == null || !process.isAlive()) {
+            status = Status.NOT_RUNNING;
+        } else {
+            status = Status.RUNNING;
+        }
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
