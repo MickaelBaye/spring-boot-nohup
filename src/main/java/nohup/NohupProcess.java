@@ -110,13 +110,13 @@ public class NohupProcess implements Runnable {
         return ret;
     }
 
-    public boolean interrupt() {
+    public boolean kill() {
         boolean ret = false;
         try {
             process.destroy();
             ret = true;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to interrupt nohup process : " +  this.toString(), e);
+            logger.log(Level.SEVERE, "Failed to kill nohup process : " +  this.toString(), e);
         }
         return ret;
     }

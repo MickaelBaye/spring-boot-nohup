@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class NohupRequest {
 
+    private String id;
     private String command;
     private List<String> parameters;
 
@@ -26,10 +27,19 @@ public class NohupRequest {
         this.parameters = parameters;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "NohupRequest{" +
-                "command='" + command + '\'' +
+                "id='" + id + '\'' +
+                ", command='" + command + '\'' +
                 ", parameters=" + parameters +
                 '}';
     }

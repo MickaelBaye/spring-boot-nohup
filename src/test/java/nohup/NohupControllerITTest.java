@@ -100,12 +100,20 @@ public class NohupControllerITTest {
 	}
 
 	@Test
-	public void paramNohupInterruptByIdShouldReturnOKHTTPStatus() throws Exception {
+	public void paramNohupKillByIdShouldReturnOKHTTPStatus() throws Exception {
 
 		this.mockMvc.perform(get("/nohup/toto-toto/kill"))
                 .andDo(print())
 				.andExpect(status().isOk());
 	}
+
+    @Test
+    public void paramNohupRestartByIdShouldReturnOKHTTPStatus() throws Exception {
+
+        this.mockMvc.perform(get("/nohup/toto-toto/restart"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 
 	protected String json(Object o) throws IOException {
 		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();

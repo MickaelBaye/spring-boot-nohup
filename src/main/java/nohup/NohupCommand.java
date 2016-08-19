@@ -10,26 +10,15 @@ public class NohupCommand {
 
     private static Logger logger = Logger.getLogger(NohupCommand.class.getName());
 
-    public NohupResponse execute(NohupRequest request) {
+    public NohupProcess execute(NohupProcess process) throws Exception {
 
-        NohupResponse response = null;
+        Thread thread = new Thread(process);
 
-        try {
-            response = new NohupResponse();
-            NohupProcess process = new NohupProcess(request.getCommand(), request.getParameters());
-            Thread thread = new Thread(process);
+        thread.start();
+        process.setThread(thread);
 
-            thread.start();
-            process.setThread(thread);
-            response.setProcess(process);
-            response.setStatus("OK");
+        logger.log(Level.INFO, process.toString());
 
-            logger.log(Level.INFO, response.toString());
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to execute nohup command !", e);
-            response.setStatus("KO");
-        }
-
-        return response;
+        return process;
     }
 }
