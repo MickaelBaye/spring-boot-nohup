@@ -70,7 +70,7 @@ public class NohupControllerITTest {
         request.setCommand("");
         request.setParameters(new ArrayList<>());
 
-		this.mockMvc.perform(post("/nohup/new")
+		this.mockMvc.perform(post("/nohup/")
 				.content(this.json(request))
 				.contentType(contentType))
                 .andDo(print())
@@ -80,15 +80,23 @@ public class NohupControllerITTest {
 	@Test
 	public void paramNohupGetByIdShouldReturnOKHTTPStatus() throws Exception {
 
-		this.mockMvc.perform(get("/nohup/get/toto-toto"))
+		this.mockMvc.perform(get("/nohup/toto-toto"))
                 .andDo(print())
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	public void paramNohupGetAllShouldReturnOKHTTPStatus() throws Exception {
+
+		this.mockMvc.perform(get("/nohup/"))
+				.andDo(print())
 				.andExpect(status().isOk());
 	}
 
 	@Test
 	public void paramNohupInterruptByIdShouldReturnOKHTTPStatus() throws Exception {
 
-		this.mockMvc.perform(get("/nohup/interrupt/toto-toto"))
+		this.mockMvc.perform(get("/nohup/toto-toto/interrupt"))
                 .andDo(print())
 				.andExpect(status().isOk());
 	}

@@ -15,7 +15,7 @@ public class NohupController {
 
     private Map<String, NohupProcess> processes = new HashMap<>();
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public NohupResponse nohupNew(@RequestBody NohupRequest nohupRequest) {
 
         logger.log(Level.INFO, nohupRequest.toString());
@@ -33,12 +33,13 @@ public class NohupController {
         return response ;
     }
 
-    @RequestMapping(value = "/get/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public Map<String, NohupProcess> nohupGetAll() {
+        logger.log(Level.INFO, processes.toString());
         return processes;
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public NohupResponse nohupGetById(@PathVariable String id) {
 
         logger.log(Level.INFO, "id=" + id);
@@ -58,7 +59,7 @@ public class NohupController {
         return response;
     }
 
-    @RequestMapping(value = "/interrupt/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/interrupt", method = RequestMethod.GET)
     public NohupResponse nohupInterruptById(@PathVariable String id) {
 
         logger.log(Level.INFO, "id=" + id);
