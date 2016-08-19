@@ -49,6 +49,13 @@ public class NohupController {
         return processes;
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    public Map<String, NohupProcess> nohupClearAll() {
+        processes.clear();
+        logger.log(Level.INFO, processes.toString());
+        return processes;
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public NohupResponse nohupGetById(@PathVariable String id) {
 

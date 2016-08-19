@@ -114,6 +114,14 @@ public class NohupControllerITTest {
 				.andExpect(status().isOk());
 	}
 
+    @Test
+    public void paramNohupClearAllShouldReturnOKHTTPStatus() throws Exception {
+
+        this.mockMvc.perform(delete("/nohup/"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
 	@Test
 	public void paramNohupKillByIdShouldReturnOKHTTPStatus() throws Exception {
 
