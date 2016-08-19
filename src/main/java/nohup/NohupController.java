@@ -70,6 +70,35 @@ public class NohupController {
         return response;
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public NohupResponse nohupUpdateById(@PathVariable String id, @RequestBody NohupRequest request) {
+
+        logger.log(Level.INFO, "id=" + id);
+        NohupResponse response = new NohupResponse();
+        NohupProcess process = processes.get(id);
+
+        if (process != null) {
+            if (request.getCommand() == null || request.getCommand().isEmpty()) {
+                response.setStatus("KO - Command not accepted : " + request.getCommand());
+                logger.log(Level.WARNING, "Command not accepted : " + request.getCommand());
+            } else {
+                process.setCommand(request.getCommand());
+                process.setParameters(request.getParameters());
+                process.tail();
+                processes.put(id, process);
+                response.setProcess(process);
+                response.setStatus("OK");
+            }
+        } else {
+            response.setStatus("KO - Nohup process not found : " + id);
+            logger.log(Level.WARNING, "Nohup process not found : " + id);
+        }
+
+        logger.log(Level.INFO, response.toString());
+
+        return response;
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public NohupResponse nohupDeleteById(@PathVariable String id) {
 
