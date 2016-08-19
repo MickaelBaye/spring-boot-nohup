@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -28,19 +31,17 @@ public class NohupProcess implements Runnable {
     private Process process;
     @JsonIgnore
     private Thread thread;
-
-    public Thread getThread() {
-        return thread;
-    }
-
-    public void setThread(Thread thread) {
-        this.thread = thread;
-    }
+    @JsonProperty
+    private List<String> standardOutput;
+    @JsonProperty
+    private List<String> errorOutput;
 
     public NohupProcess(String command, List<String> parameters) {
         this.id = UUID.randomUUID().toString();
         this.command = command;
         this.parameters = parameters;
+        this.standardOutput = new ArrayList<>();
+        this.errorOutput = new ArrayList<>();
     }
 
     @Override
@@ -58,6 +59,36 @@ public class NohupProcess implements Runnable {
         }
     }
 
+    public boolean tail() {
+
+        boolean ret = false;
+        try {
+            standardOutput = readInputStream(process.getInputStream());
+            errorOutput = readInputStream(process.getErrorStream());
+            ret = true;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to tail : " + this.toString());
+        }
+
+        return ret;
+    }
+
+    private List<String> readInputStream(InputStream inputStream) {
+
+        List<String> ret = new ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+            String line = br.readLine();
+            while (line != null) {
+                ret.add(line);
+                line = br.readLine();
+            }
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to read inputstream : " + this.toString());
+        }
+        return ret;
+    }
+
     public boolean interrupt() {
         boolean ret = false;
         try {
@@ -67,6 +98,30 @@ public class NohupProcess implements Runnable {
             logger.log(Level.SEVERE, "Failed to interrupt nohup process : " +  this.toString(), e);
         }
         return ret;
+    }
+
+    public List<String> getStandardOutput() {
+        return standardOutput;
+    }
+
+    public void setStandardOutput(List<String> standardOutput) {
+        this.standardOutput = standardOutput;
+    }
+
+    public List<String> getErrorOutput() {
+        return errorOutput;
+    }
+
+    public void setErrorOutput(List<String> errorOutput) {
+        this.errorOutput = errorOutput;
+    }
+
+    public Thread getThread() {
+        return thread;
+    }
+
+    public void setThread(Thread thread) {
+        this.thread = thread;
     }
 
     public String getId() {

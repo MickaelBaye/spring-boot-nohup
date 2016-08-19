@@ -48,6 +48,7 @@ public class NohupController {
 
         if (process != null) {
             response.setStatus("OK");
+            process.tail();
             response.setProcess(process);
         } else {
             response.setStatus("KO - Nohup process not found : " + id);
