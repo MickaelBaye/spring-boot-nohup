@@ -60,8 +60,29 @@ public class NohupController {
         return response;
     }
 
-    @RequestMapping(value = "/{id}/interrupt", method = RequestMethod.GET)
-    public NohupResponse nohupInterruptById(@PathVariable String id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public NohupResponse nohupDeleteById(@PathVariable String id) {
+
+        logger.log(Level.INFO, "id=" + id);
+        NohupResponse response = new NohupResponse();
+        NohupProcess process = processes.get(id);
+
+        if (process != null) {
+            processes.remove(id);
+            response.setStatus("OK");
+            response.setProcess(process);
+        } else {
+            response.setStatus("KO - Nohup process not found : " + id);
+            logger.log(Level.WARNING, "Nohup process not found : " + id);
+        }
+
+        logger.log(Level.INFO, response.toString());
+
+        return response;
+    }
+
+    @RequestMapping(value = "/{id}/kill", method = RequestMethod.GET)
+    public NohupResponse nohupKillById(@PathVariable String id) {
 
         logger.log(Level.INFO, "id=" + id);
         NohupResponse response = new NohupResponse();
@@ -72,14 +93,13 @@ public class NohupController {
             try {
                 if (process.interrupt()) {
                     response.setStatus("OK");
-                    processes.remove(id);
                 } else {
-                    response.setStatus("KO - Can not interrupt process : " + process.toString());
-                    logger.log(Level.WARNING, "Can not interrupt process : " + process.toString());
+                    response.setStatus("KO - Can not kill process : " + process.toString());
+                    logger.log(Level.WARNING, "Can not kill process : " + process.toString());
                 }
             } catch (Exception e) {
-                response.setStatus("KO - Failed to interrupt process : " + process.toString());
-                logger.log(Level.SEVERE, "Failed to interrupt process : " + process.toString());
+                response.setStatus("KO - Failed to kill process : " + process.toString());
+                logger.log(Level.SEVERE, "Failed to kill process : " + process.toString());
             }
         } else {
             response.setStatus("KO - Nohup process not found : " + id);

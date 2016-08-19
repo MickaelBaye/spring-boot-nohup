@@ -2,6 +2,7 @@ package nohup;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -82,6 +83,14 @@ public class NohupControllerITTest {
 				.andExpect(status().isOk());
 	}
 
+    @Test
+    public void paramNohupDeleteByIdShouldReturnOKHTTPStatus() throws Exception {
+
+        this.mockMvc.perform(delete("/nohup/toto-toto"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
 	@Test
 	public void paramNohupGetAllShouldReturnOKHTTPStatus() throws Exception {
 
@@ -93,7 +102,7 @@ public class NohupControllerITTest {
 	@Test
 	public void paramNohupInterruptByIdShouldReturnOKHTTPStatus() throws Exception {
 
-		this.mockMvc.perform(get("/nohup/toto-toto/interrupt"))
+		this.mockMvc.perform(get("/nohup/toto-toto/kill"))
                 .andDo(print())
 				.andExpect(status().isOk());
 	}
