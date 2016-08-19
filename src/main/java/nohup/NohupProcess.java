@@ -82,8 +82,10 @@ public class NohupProcess implements Runnable {
 
         boolean ret = false;
         try {
-            standardOutput = readInputStream(process.getInputStream());
-            errorOutput = readInputStream(process.getErrorStream());
+            if (getStatus() == Status.NOT_RUNNING) {
+                standardOutput = readInputStream(process.getInputStream());
+                errorOutput = readInputStream(process.getErrorStream());
+            }
             ret = true;
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to tail : " + this.toString());
