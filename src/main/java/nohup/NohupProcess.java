@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +21,8 @@ import java.util.logging.Logger;
 public class NohupProcess implements Runnable {
 
     public enum Status {
-        RUNNING ("RUNNING"),
-        NOT_RUNNING ("NOT_RUNNING");
+        RUNNING("RUNNING"),
+        NOT_RUNNING("NOT_RUNNING");
 
         private String status;
 
@@ -82,10 +83,8 @@ public class NohupProcess implements Runnable {
 
         boolean ret = false;
         try {
-            if (getStatus() == Status.NOT_RUNNING) {
-                standardOutput = readInputStream(process.getInputStream());
-                errorOutput = readInputStream(process.getErrorStream());
-            }
+            standardOutput.addAll(readInputStream(process.getInputStream()));
+            errorOutput.addAll(readInputStream(process.getErrorStream()));
             ret = true;
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to tail : " + this.toString());
@@ -98,11 +97,16 @@ public class NohupProcess implements Runnable {
 
         List<String> ret = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-            String line = br.readLine();
-            while (line != null) {
-                ret.add(line);
-                line = br.readLine();
+            byte[] bytes = new byte[256];
+            String line;
+            StringTokenizer st;
+            while (inputStream.available() > 0) {
+                inputStream.read(bytes);
+                line = new String(bytes);
+                st = new StringTokenizer(line, "\r\n");
+                while (st.hasMoreTokens()) {
+                    ret.add(st.nextToken());
+                }
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to read inputstream : " + this.toString());
@@ -116,7 +120,7 @@ public class NohupProcess implements Runnable {
             process.destroy();
             ret = true;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to kill nohup process : " +  this.toString(), e);
+            logger.log(Level.SEVERE, "Failed to kill nohup process : " + this.toString(), e);
         }
         return ret;
     }
