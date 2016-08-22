@@ -26,7 +26,6 @@ public class NohupController {
             response.setStatus("KO - Command not accepted : " + nohupRequest.getCommand());
             logger.log(Level.WARNING, "Command not accepted : " + nohupRequest.getCommand());
         } else {
-            //TODO: use process instead of request
             try {
                 process = new NohupCommand().execute(new NohupProcess(nohupRequest.getCommand(), nohupRequest.getParameters()));
                 response.setStatus("OK");
@@ -167,7 +166,6 @@ public class NohupController {
         if (process != null) {
             response.setProcess(process);
             try {
-                //TODO: use process instead of request
                 process = new NohupCommand().execute(process);
                 response.setStatus("OK");
                 response.setProcess(process);

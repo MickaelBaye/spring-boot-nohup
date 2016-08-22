@@ -6,8 +6,8 @@ TODO
 
 ### Prerequisites
 
-* JDK 7
-* Maven
+* JDK 8
+* Maven 3
 
 ### Installation
 
@@ -18,8 +18,8 @@ mvn install
 ### Run the Application
 
 ```
-mvn package
-java -jar target/spring-boot-nohup-0.0.1.jar
+mvn clean package
+java -Dserver.port=8080 -jar target/spring-boot-nohup-0.1-SNAPSHOT.jar
 ```
 
 ## Directory Layout
