@@ -2,7 +2,9 @@ package nohup;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +52,22 @@ public class NohupController {
 
     @RequestMapping(value = "/", method = RequestMethod.DELETE)
     public Map<String, NohupProcess> nohupClearAll() {
+        nohupKillAll();
         processes.clear();
+        logger.log(Level.INFO, processes.toString());
+        return processes;
+    }
+
+    @RequestMapping(value = "/killAll", method = RequestMethod.GET)
+    public Map<String, NohupProcess> nohupKillAll() {
+
+        Collection<NohupProcess> collection = processes.values();
+        for (Iterator<NohupProcess> it = collection.iterator(); it.hasNext();) {
+            NohupProcess p = it.next();
+            if (p.kill()) {
+                logger.log(Level.INFO, "Process " + p.toString() + " killed successfully.");
+            }
+        }
         logger.log(Level.INFO, processes.toString());
         return processes;
     }

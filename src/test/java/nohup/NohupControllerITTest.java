@@ -123,6 +123,14 @@ public class NohupControllerITTest {
     }
 
 	@Test
+	public void paramNohupKillAllShouldReturnOKHTTPStatus() throws Exception {
+
+		this.mockMvc.perform(get("/nohup/killAll"))
+				.andDo(print())
+				.andExpect(status().isOk());
+	}
+
+	@Test
 	public void paramNohupKillByIdShouldReturnOKHTTPStatus() throws Exception {
 
 		this.mockMvc.perform(get("/nohup/toto-toto/kill"))
