@@ -10,6 +10,15 @@ public class NohupRequest {
     private String id;
     private String command;
     private List<String> parameters;
+    private String alias;
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
 
     public String getCommand() {
         return command;
@@ -41,6 +50,8 @@ public class NohupRequest {
                 "id='" + id + '\'' +
                 ", command='" + command + '\'' +
                 ", parameters=" + parameters +
+                ", alias='" + alias + '\'' +
                 '}';
     }
+
 }

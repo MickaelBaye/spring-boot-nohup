@@ -33,6 +33,10 @@ public class NohupController {
                 response.setStatus("OK");
                 response.setProcess(process);
                 processes.put(response.getProcess().getId(), response.getProcess());
+                // Add with alias
+                if (nohupRequest.getAlias() != null && !nohupRequest.getAlias().isEmpty()) {
+                    processes.put(nohupRequest.getAlias(), response.getProcess());
+                }
             } catch (Exception e) {
                 response.setStatus("KO - Failed to run new process");
                 logger.log(Level.SEVERE, "KO - Failed to run new process", e);
