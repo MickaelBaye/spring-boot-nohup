@@ -1,11 +1,10 @@
 package nohup;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,8 +12,10 @@ import java.util.logging.Logger;
 @RequestMapping("/nohup")
 public class NohupController {
 
+    @Autowired
+    private Environment environment;
     private static Logger logger = Logger.getLogger(NohupController.class.getName());
-
+    private static List<String> reservedKeywords ;
     private Map<String, NohupProcess> processes = new HashMap<>();
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
@@ -35,7 +36,15 @@ public class NohupController {
                 processes.put(response.getProcess().getId(), response.getProcess());
                 // Add with alias
                 if (nohupRequest.getAlias() != null && !nohupRequest.getAlias().isEmpty()) {
-                    processes.put(nohupRequest.getAlias(), response.getProcess());
+                    if (isReservedKeyword(nohupRequest.getAlias())) {
+                        response.setStatus("WARN - Alias not accepted : " + nohupRequest.getAlias());
+                        logger.log(Level.WARNING, "Alias not accepted : " + nohupRequest.getAlias());
+                    } else if (processes.keySet().contains(nohupRequest.getAlias())) {
+                        response.setStatus("WARN - Alias already used : " + nohupRequest.getAlias());
+                        logger.log(Level.WARNING, "Alias already used : " + nohupRequest.getAlias());
+                    } else {
+                        processes.put(nohupRequest.getAlias(), response.getProcess());
+                    }
                 }
             } catch (Exception e) {
                 response.setStatus("KO - Failed to run new process");
@@ -203,5 +212,38 @@ public class NohupController {
         logger.log(Level.INFO, response.toString());
 
         return response;
+    }
+
+    private List<String> initReservedKeyword() {
+
+        String reservedKeywords = environment.getProperty("nohup.reservedKeywords");
+        logger.log(Level.INFO, "nohup.reservedKeyword=" + reservedKeywords);
+
+        List<String> ret = new ArrayList<>();
+        if (!reservedKeywords.isEmpty()) {
+            String[] words = reservedKeywords.split(",");
+            for (int i = 0; i < words.length; i++) {
+                ret.add(words[i]);
+            }
+        }
+
+        return ret;
+    }
+
+    private boolean isReservedKeyword(String s) {
+
+        logger.log(Level.INFO, "s=" + s);
+
+        boolean ret = false;
+        if (reservedKeywords == null) {
+            reservedKeywords = initReservedKeyword();
+        }
+        if (s != null && !s.isEmpty())  {
+            ret = reservedKeywords.contains(s);
+        }
+
+        logger.log(Level.INFO, "ret=" + ret);
+
+        return ret;
     }
 }
