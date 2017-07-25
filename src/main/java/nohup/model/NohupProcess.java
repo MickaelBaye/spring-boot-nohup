@@ -1,12 +1,13 @@
-package nohup;
+package nohup.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import nohup.exceptions.FailedKillAllException;
+import nohup.exceptions.FailedKillException;
+import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -15,11 +16,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * TODO documentation
  * Created by mibaye on 17/08/2016.
  */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public class NohupProcess implements Runnable {
 
+    /**
+     * TODO documentation
+     */
     public enum Status {
         RUNNING("RUNNING"),
         NOT_RUNNING("NOT_RUNNING");
@@ -36,7 +41,7 @@ public class NohupProcess implements Runnable {
     }
 
     @JsonIgnore
-    private static Logger logger = Logger.getLogger(NohupProcess.class.getName());
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(NohupProcess.class);
     @JsonProperty
     private String id;
     @JsonProperty
@@ -54,6 +59,11 @@ public class NohupProcess implements Runnable {
     @JsonProperty
     private Status status;
 
+    /**
+     * TODO documentation
+     * @param command
+     * @param parameters
+     */
     public NohupProcess(String command, List<String> parameters) {
         this.id = UUID.randomUUID().toString();
         this.command = command;
@@ -63,6 +73,9 @@ public class NohupProcess implements Runnable {
         this.status = Status.NOT_RUNNING;
     }
 
+    /**
+     * TODO documentation
+     */
     @Override
     public void run() {
 
@@ -75,10 +88,14 @@ public class NohupProcess implements Runnable {
             process = processBuilder.start();
             status = Status.RUNNING;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to run nohup process : " + this.toString(), e);
+            LOGGER.error(String.format("Failed to run nohup process : {}", this.toString()), e);
         }
     }
 
+    /**
+     * TODO documentation
+     * @return
+     */
     public boolean tail() {
 
         boolean ret = false;
@@ -87,12 +104,17 @@ public class NohupProcess implements Runnable {
             errorOutput.addAll(readInputStream(process.getErrorStream()));
             ret = true;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to tail : " + this.toString());
+            LOGGER.error(String.format("Failed to tail : {}", this.toString()), e);
         }
 
         return ret;
     }
 
+    /**
+     * TODO documentation
+     * @param inputStream
+     * @return
+     */
     private List<String> readInputStream(InputStream inputStream) {
 
         List<String> ret = new ArrayList<>();
@@ -109,54 +131,92 @@ public class NohupProcess implements Runnable {
                 }
             }
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to read inputstream : " + this.toString());
+            LOGGER.error(String.format("Failed to read inputstream : {}", this.toString()), e);
         }
         return ret;
     }
 
-    public boolean kill() {
-        boolean ret = false;
+    /**
+     * TODO documentation
+     * @return
+     */
+    public void kill() throws FailedKillException {
         try {
             process.destroy();
-            ret = true;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to kill nohup process : " + this.toString(), e);
+            LOGGER.error(String.format("Failed to kill process : {}", this.toString()), e);
+            throw new FailedKillException(String.format("Failed to kill process : {}", this.toString()), e);
         }
-        return ret;
     }
 
+    /**
+     * TODO documentation
+     * @return
+     */
     public List<String> getStandardOutput() {
         return standardOutput;
     }
 
+    /**
+     * TODO documentation
+     * @param standardOutput
+     */
     public void setStandardOutput(List<String> standardOutput) {
         this.standardOutput = standardOutput;
     }
 
+    /**
+     * TODO documentation
+     * @return
+     */
     public List<String> getErrorOutput() {
         return errorOutput;
     }
 
+    /**
+     * TODO documentation
+     * @param errorOutput
+     */
     public void setErrorOutput(List<String> errorOutput) {
         this.errorOutput = errorOutput;
     }
 
+    /**
+     * TODO documentation
+     * @return
+     */
     public Thread getThread() {
         return thread;
     }
 
+    /**
+     * TODO documentation
+     * @param thread
+     */
     public void setThread(Thread thread) {
         this.thread = thread;
     }
 
+    /**
+     * TODO documentation
+     * @return
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * TODO documentation
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * TODO documentation
+     * @return
+     */
     public Status getStatus() {
         if (process == null || !process.isAlive()) {
             status = Status.NOT_RUNNING;
@@ -166,22 +226,42 @@ public class NohupProcess implements Runnable {
         return status;
     }
 
+    /**
+     * TODO documentation
+     * @param status
+     */
     public void setStatus(Status status) {
         this.status = status;
     }
 
+    /**
+     * TODO documentation
+     * @return
+     */
     public String getCommand() {
         return command;
     }
 
+    /**
+     * TODO documentation
+     * @param command
+     */
     public void setCommand(String command) {
         this.command = command;
     }
 
+    /**
+     * TODO documentation
+     * @return
+     */
     public List<String> getParameters() {
         return parameters;
     }
 
+    /**
+     * TODO documentation
+     * @param parameters
+     */
     public void setParameters(List<String> parameters) {
         this.parameters = parameters;
     }
