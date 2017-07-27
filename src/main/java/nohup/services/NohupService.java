@@ -42,7 +42,7 @@ public class NohupService {
             LOGGER.warn("Command not accepted : {}", command);
             throw new CommandNotAcceptedException(String.format("Command not accepted : %s", command));
         } else try {
-            nohupProcess = new NohupCommand().execute(new NohupProcess(command, parameters));
+            nohupProcess = new NohupCommand().execute(new NohupProcess(command, parameters, alias));
         } catch (Exception e) {
             LOGGER.error("Failed to run new process", e);
             throw new FailedRunProcessException("Failed to run new process", e);
@@ -208,6 +208,7 @@ public class NohupService {
                 LOGGER.warn("Alias already used : {}", alias);
                 throw new AliasAlreadyUsedException(String.format("Alias already used : %s", alias));
             } else {
+                nohupProcess.getAliases().add(alias);
                 processes.put(alias, nohupProcess);
             }
         }

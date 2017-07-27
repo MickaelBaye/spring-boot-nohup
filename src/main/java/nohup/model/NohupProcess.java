@@ -58,19 +58,23 @@ public class NohupProcess implements Runnable {
     private List<String> errorOutput;
     @JsonProperty
     private Status status;
+    @JsonProperty
+    private List<String> aliases;
 
     /**
      * TODO documentation
      * @param command
      * @param parameters
      */
-    public NohupProcess(String command, List<String> parameters) {
+    public NohupProcess(String command, List<String> parameters, String alias) {
         this.id = UUID.randomUUID().toString();
         this.command = command;
         this.parameters = parameters;
         this.standardOutput = new ArrayList<>();
         this.errorOutput = new ArrayList<>();
         this.status = Status.NOT_RUNNING;
+        this.aliases = new ArrayList<>();
+        this.aliases.add(alias);
     }
 
     /**
@@ -264,6 +268,22 @@ public class NohupProcess implements Runnable {
      */
     public void setParameters(List<String> parameters) {
         this.parameters = parameters;
+    }
+
+    /**
+     * TODO Documentation
+     * @return
+     */
+    public List<String> getAliases() {
+        return aliases;
+    }
+
+    /**
+     * TODO documentation
+     * @param aliases
+     */
+    public void setAliases(List<String> aliases) {
+        this.aliases = aliases;
     }
 
     @Override
