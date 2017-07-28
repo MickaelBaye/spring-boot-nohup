@@ -3,7 +3,6 @@ package nohup.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import nohup.exceptions.FailedKillAllException;
 import nohup.exceptions.FailedKillException;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * TODO documentation

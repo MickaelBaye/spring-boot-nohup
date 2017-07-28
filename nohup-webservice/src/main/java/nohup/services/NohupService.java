@@ -1,6 +1,5 @@
 package nohup.services;
 
-import nohup.controllers.NohupController;
 import nohup.exceptions.*;
 import nohup.model.NohupCommand;
 import nohup.model.NohupProcess;

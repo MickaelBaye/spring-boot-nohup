@@ -1,0 +1,444 @@
+16:26:24.424  INFO  1460 --- [main] nohup.NohupControllerITTest : Starting NohupControllerITTest on LFR016445 with PID 4200 (started by mibaye in D:\Users\mibaye\Dev\Projects\spring-boot-nohup\nohup-webservice)
+16:26:24.426  DEBUG 1462 --- [main] nohup.NohupControllerITTest : Running with Spring Boot v1.4.0.RELEASE, Spring v4.3.2.RELEASE
+16:26:24.427  INFO  1463 --- [main] nohup.NohupControllerITTest : No active profile set, falling back to default profiles: default
+16:26:27.560  INFO  4596 --- [main] nohup.NohupControllerITTest : Started NohupControllerITTest in 3.941 seconds (JVM running for 5.002)
+16:26:27.728  INFO  4764 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:26:27.731  ERROR 4767 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:26:27.732  ERROR 4768 --- [main] nohup.controllers.NohupController : KO - Process not found : {}
+16:26:27.733  INFO  4769 --- [main] nohup.controllers.NohupController : OK - delete process = NohupResponse{status='KO', process='null'}
+16:26:27.944  INFO  4980 --- [main] nohup.controllers.NohupController : NohupRequest{id='null', command='', parameters=[], alias='null'}
+16:26:27.944  INFO  4980 --- [main] nohup.services.NohupService : command = , parameters = [], alias = null
+16:26:27.944  WARN  4980 --- [main] nohup.services.NohupService : Command not accepted : 
+16:26:27.945  ERROR 4981 --- [main] nohup.controllers.NohupController : KO - Command not accepted : {}
+16:26:27.945  INFO  4981 --- [main] nohup.controllers.NohupController : OK - create new process = NohupResponse{status='KO', process='null'}
+16:26:27.973  INFO  5009 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:26:27.973  ERROR 5009 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:26:27.982  ERROR 5018 --- [main] nohup.controllers.NohupController : KO - Process not found : toto-toto
+nohup.exceptions.ProcessNotFoundException: Process not found, id = toto-toto
+	at nohup.services.NohupService.getById(NohupService.java:67)
+	at nohup.services.NohupService.restartById(NohupService.java:143)
+	at nohup.controllers.NohupController.nohupRestartById(NohupController.java:252)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:65)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:167)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:134)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:155)
+	at nohup.NohupControllerITTest.paramNohupRestartByIdShouldReturnOKHTTPStatus(NohupControllerITTest.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:283)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:173)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:203)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+16:26:27.987  INFO  5023 --- [main] nohup.controllers.NohupController : OK - restart process = NohupResponse{status='KO', process='null'}
+16:26:28.011  INFO  5047 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:26:28.011  ERROR 5047 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:26:28.011  ERROR 5047 --- [main] nohup.controllers.NohupController : Process not found : toto-toto
+16:26:28.011  ERROR 5047 --- [main] nohup.controllers.NohupController : KO - Process not found : toto-toto
+16:26:28.012  INFO  5048 --- [main] nohup.controllers.NohupController : OK - get process = NohupResponse{status='KO', process='null'}
+16:26:28.042  INFO  5078 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:26:28.043  ERROR 5079 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:26:28.043  ERROR 5079 --- [main] nohup.controllers.NohupController : KO - Process not found : toto-toto
+nohup.exceptions.ProcessNotFoundException: Process not found, id = toto-toto
+	at nohup.services.NohupService.getById(NohupService.java:67)
+	at nohup.services.NohupService.killById(NohupService.java:129)
+	at nohup.controllers.NohupController.nohupKillById(NohupController.java:221)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:65)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:167)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:134)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:155)
+	at nohup.NohupControllerITTest.paramNohupKillByIdShouldReturnOKHTTPStatus(NohupControllerITTest.java:131)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:283)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:173)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:203)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+16:26:28.048  INFO  5084 --- [main] nohup.controllers.NohupController : OK - kill process = NohupResponse{status='KO', process='null'}
+16:26:28.078  INFO  5114 --- [main] nohup.controllers.NohupController : OK - get all processes = {}
+16:26:28.154  INFO  5190 --- [main] nohup.controllers.NohupController : OK - kill all processes = {}
+16:26:28.168  INFO  5204 --- [main] nohup.controllers.NohupController : id = toto-toto, nohupRequest = NohupRequest{id='null', command='', parameters=[], alias='null'}
+16:26:28.168  INFO  5204 --- [main] nohup.services.NohupService : id = toto-toto, command = , parameters = [], alias = null
+16:26:28.169  ERROR 5205 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:26:28.169  ERROR 5205 --- [main] nohup.controllers.NohupController : KO - Process not found : {}
+16:26:28.169  INFO  5205 --- [main] nohup.controllers.NohupController : OK - update process = NohupResponse{status='KO', process='null'}
+16:26:28.182  INFO  5218 --- [main] nohup.controllers.NohupController : OK - clear all processes = {}
+16:27:36.281  INFO  1483 --- [main] nohup.NohupControllerITTest : Starting NohupControllerITTest on LFR016445 with PID 1716 (started by mibaye in D:\Users\mibaye\Dev\Projects\spring-boot-nohup\nohup-webservice)
+16:27:36.283  DEBUG 1485 --- [main] nohup.NohupControllerITTest : Running with Spring Boot v1.4.0.RELEASE, Spring v4.3.2.RELEASE
+16:27:36.283  INFO  1485 --- [main] nohup.NohupControllerITTest : No active profile set, falling back to default profiles: default
+16:27:39.470  INFO  4672 --- [main] nohup.NohupControllerITTest : Started NohupControllerITTest in 3.975 seconds (JVM running for 5.167)
+16:27:39.649  INFO  4851 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:27:39.652  ERROR 4854 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:27:39.654  ERROR 4856 --- [main] nohup.controllers.NohupController : KO - Process not found : {}
+16:27:39.659  INFO  4861 --- [main] nohup.controllers.NohupController : OK - delete process = NohupResponse{status='KO', process='null'}
+16:27:39.859  INFO  5061 --- [main] nohup.controllers.NohupController : NohupRequest{id='null', command='', parameters=[], alias='null'}
+16:27:39.859  INFO  5061 --- [main] nohup.services.NohupService : command = , parameters = [], alias = null
+16:27:39.859  WARN  5061 --- [main] nohup.services.NohupService : Command not accepted : 
+16:27:39.860  ERROR 5062 --- [main] nohup.controllers.NohupController : KO - Command not accepted : {}
+16:27:39.860  INFO  5062 --- [main] nohup.controllers.NohupController : OK - create new process = NohupResponse{status='KO', process='null'}
+16:27:39.886  INFO  5088 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:27:39.888  ERROR 5090 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:27:39.891  ERROR 5093 --- [main] nohup.controllers.NohupController : KO - Process not found : toto-toto
+nohup.exceptions.ProcessNotFoundException: Process not found, id = toto-toto
+	at nohup.services.NohupService.getById(NohupService.java:67)
+	at nohup.services.NohupService.restartById(NohupService.java:143)
+	at nohup.controllers.NohupController.nohupRestartById(NohupController.java:252)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:65)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:167)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:134)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:155)
+	at nohup.NohupControllerITTest.paramNohupRestartByIdShouldReturnOKHTTPStatus(NohupControllerITTest.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:283)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:173)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:203)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+16:27:39.893  INFO  5095 --- [main] nohup.controllers.NohupController : OK - restart process = NohupResponse{status='KO', process='null'}
+16:27:39.915  INFO  5117 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:27:39.915  ERROR 5117 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:27:39.915  ERROR 5117 --- [main] nohup.controllers.NohupController : Process not found : toto-toto
+16:27:39.915  ERROR 5117 --- [main] nohup.controllers.NohupController : KO - Process not found : toto-toto
+16:27:39.917  INFO  5119 --- [main] nohup.controllers.NohupController : OK - get process = NohupResponse{status='KO', process='null'}
+16:27:39.940  INFO  5142 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:27:39.941  ERROR 5143 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:27:39.941  ERROR 5143 --- [main] nohup.controllers.NohupController : KO - Process not found : toto-toto
+nohup.exceptions.ProcessNotFoundException: Process not found, id = toto-toto
+	at nohup.services.NohupService.getById(NohupService.java:67)
+	at nohup.services.NohupService.killById(NohupService.java:129)
+	at nohup.controllers.NohupController.nohupKillById(NohupController.java:221)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:65)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:167)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:134)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:155)
+	at nohup.NohupControllerITTest.paramNohupKillByIdShouldReturnOKHTTPStatus(NohupControllerITTest.java:131)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:283)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:173)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:203)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+16:27:39.943  INFO  5145 --- [main] nohup.controllers.NohupController : OK - kill process = NohupResponse{status='KO', process='null'}
+16:27:39.955  INFO  5157 --- [main] nohup.controllers.NohupController : OK - get all processes = {}
+16:27:39.977  INFO  5179 --- [main] nohup.controllers.NohupController : OK - kill all processes = {}
+16:27:39.996  INFO  5198 --- [main] nohup.controllers.NohupController : id = toto-toto, nohupRequest = NohupRequest{id='null', command='', parameters=[], alias='null'}
+16:27:39.996  INFO  5198 --- [main] nohup.services.NohupService : id = toto-toto, command = , parameters = [], alias = null
+16:27:39.996  ERROR 5198 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:27:39.997  ERROR 5199 --- [main] nohup.controllers.NohupController : KO - Process not found : {}
+16:27:39.997  INFO  5199 --- [main] nohup.controllers.NohupController : OK - update process = NohupResponse{status='KO', process='null'}
+16:27:40.017  INFO  5219 --- [main] nohup.controllers.NohupController : OK - clear all processes = {}
+16:55:36.913  INFO  1381 --- [main] nohup.NohupControllerITTest : Starting NohupControllerITTest on LFR016445 with PID 17128 (started by mibaye in D:\Users\mibaye\Dev\Projects\spring-boot-nohup\nohup-webservice)
+16:55:36.915  DEBUG 1383 --- [main] nohup.NohupControllerITTest : Running with Spring Boot v1.4.0.RELEASE, Spring v4.3.2.RELEASE
+16:55:36.915  INFO  1383 --- [main] nohup.NohupControllerITTest : No active profile set, falling back to default profiles: default
+16:55:40.297  INFO  4765 --- [main] nohup.NohupControllerITTest : Started NohupControllerITTest in 4.138 seconds (JVM running for 5.159)
+16:55:40.450  INFO  4918 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:55:40.452  ERROR 4920 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:55:40.453  ERROR 4921 --- [main] nohup.controllers.NohupController : KO - Process not found : {}
+16:55:40.454  INFO  4922 --- [main] nohup.controllers.NohupController : OK - delete process = NohupResponse{status='KO', process='null'}
+16:55:40.665  INFO  5133 --- [main] nohup.controllers.NohupController : NohupRequest{id='null', command='', parameters=[], alias='null'}
+16:55:40.665  INFO  5133 --- [main] nohup.services.NohupService : command = , parameters = [], alias = null
+16:55:40.666  WARN  5134 --- [main] nohup.services.NohupService : Command not accepted : 
+16:55:40.666  ERROR 5134 --- [main] nohup.controllers.NohupController : KO - Command not accepted : {}
+16:55:40.666  INFO  5134 --- [main] nohup.controllers.NohupController : OK - create new process = NohupResponse{status='KO', process='null'}
+16:55:40.719  INFO  5187 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:55:40.720  ERROR 5188 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:55:40.726  ERROR 5194 --- [main] nohup.controllers.NohupController : KO - Process not found : toto-toto
+nohup.exceptions.ProcessNotFoundException: Process not found, id = toto-toto
+	at nohup.services.NohupService.getById(NohupService.java:67)
+	at nohup.services.NohupService.restartById(NohupService.java:143)
+	at nohup.controllers.NohupController.nohupRestartById(NohupController.java:252)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:65)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:167)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:134)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:155)
+	at nohup.NohupControllerITTest.paramNohupRestartByIdShouldReturnOKHTTPStatus(NohupControllerITTest.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:283)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:173)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:203)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+16:55:40.728  INFO  5196 --- [main] nohup.controllers.NohupController : OK - restart process = NohupResponse{status='KO', process='null'}
+16:55:40.751  INFO  5219 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:55:40.752  ERROR 5220 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:55:40.752  ERROR 5220 --- [main] nohup.controllers.NohupController : Process not found : toto-toto
+16:55:40.752  ERROR 5220 --- [main] nohup.controllers.NohupController : KO - Process not found : toto-toto
+16:55:40.752  INFO  5220 --- [main] nohup.controllers.NohupController : OK - get process = NohupResponse{status='KO', process='null'}
+16:55:40.770  INFO  5238 --- [main] nohup.controllers.NohupController : id = toto-toto
+16:55:40.771  ERROR 5239 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:55:40.772  ERROR 5240 --- [main] nohup.controllers.NohupController : KO - Process not found : toto-toto
+nohup.exceptions.ProcessNotFoundException: Process not found, id = toto-toto
+	at nohup.services.NohupService.getById(NohupService.java:67)
+	at nohup.services.NohupService.killById(NohupService.java:129)
+	at nohup.controllers.NohupController.nohupKillById(NohupController.java:221)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:65)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:167)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:134)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:155)
+	at nohup.NohupControllerITTest.paramNohupKillByIdShouldReturnOKHTTPStatus(NohupControllerITTest.java:131)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:283)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:173)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:203)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+16:55:40.774  INFO  5242 --- [main] nohup.controllers.NohupController : OK - kill process = NohupResponse{status='KO', process='null'}
+16:55:40.810  INFO  5278 --- [main] nohup.controllers.NohupController : OK - get all processes = {}
+16:55:40.839  INFO  5307 --- [main] nohup.controllers.NohupController : OK - kill all processes = {}
+16:55:40.871  INFO  5339 --- [main] nohup.controllers.NohupController : id = toto-toto, nohupRequest = NohupRequest{id='null', command='', parameters=[], alias='null'}
+16:55:40.872  INFO  5340 --- [main] nohup.services.NohupService : id = toto-toto, command = , parameters = [], alias = null
+16:55:40.872  ERROR 5340 --- [main] nohup.services.NohupService : Process not found, id = toto-toto
+16:55:40.873  ERROR 5341 --- [main] nohup.controllers.NohupController : KO - Process not found : {}
+16:55:40.873  INFO  5341 --- [main] nohup.controllers.NohupController : OK - update process = NohupResponse{status='KO', process='null'}
+16:55:40.888  INFO  5356 --- [main] nohup.controllers.NohupController : OK - clear all processes = {}

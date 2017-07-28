@@ -2,9 +2,6 @@ package nohup.model;
 
 import org.slf4j.LoggerFactory;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * TODO documentation
  * Created by mibaye on 17/08/2016.

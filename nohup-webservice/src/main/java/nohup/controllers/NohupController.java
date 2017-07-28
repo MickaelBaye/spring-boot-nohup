@@ -1,19 +1,16 @@
 package nohup.controllers;
 
 import nohup.exceptions.*;
-import nohup.model.NohupCommand;
 import nohup.model.NohupProcess;
 import nohup.model.NohupRequest;
 import nohup.model.NohupResponse;
 import nohup.services.NohupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Map;
 
 /**
  * TODO documentation
@@ -42,16 +39,24 @@ public class NohupController {
 
         try {
             nohupProcess = nohupService.create(nohupRequest.getCommand(), nohupRequest.getParameters(), nohupRequest.getAlias());
-            nohupResponse.setStatus("OK");
+            nohupResponse.setStatus(NohupResponse.Status.OK);
             nohupResponse.setProcess(nohupProcess);
         } catch (FailedRunProcessException e) {
-            nohupResponse.setStatus("KO - Failed to run new process");
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage("Failed to run new process");
+            LOGGER.error("KO - Failed to run new process");
         } catch (CommandNotAcceptedException e) {
-            nohupResponse.setStatus(String.format("KO - Command not accepted : {}", nohupRequest.getCommand()));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Command not accepted : {}", nohupRequest.getCommand()));
+            LOGGER.error(String.format("KO - Command not accepted : {}", nohupRequest.getCommand()));
         } catch (AliasNotAcceptedException e) {
-            nohupResponse.setStatus(String.format("KO - Alias not accepted : {}", nohupRequest.getAlias()));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Alias not accepted : {}", nohupRequest.getAlias()));
+            LOGGER.error(String.format("KO - Alias not accepted : {}", nohupRequest.getAlias()));
         } catch (AliasAlreadyUsedException e) {
-            nohupResponse.setStatus(String.format("KO - Alias already used : {}", nohupRequest.getAlias()));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Alias already used : {}", nohupRequest.getAlias()));
+            LOGGER.error(String.format("KO - Alias already used : {}", nohupRequest.getAlias()));
         }
 
         LOGGER.info("OK - create new process = {}", nohupResponse.toString());
@@ -119,11 +124,13 @@ public class NohupController {
 
         try {
             process = nohupService.getById(id);
-            response.setStatus("OK");
+            response.setStatus(NohupResponse.Status.OK);
             response.setProcess(process);
         } catch (ProcessNotFoundException e){
             LOGGER.error("Process not found : {}", id);
-            response.setStatus(String.format("KO - Process not found : %s", id));
+            response.setStatus(NohupResponse.Status.KO);
+            response.setMessage(String.format("Process not found : %s", id));
+            LOGGER.error(String.format("KO - Process not found : %s", id));
         }
 
         LOGGER.info("OK - get process = {}", response.toString());
@@ -147,15 +154,23 @@ public class NohupController {
         try {
             nohupProcess = nohupService.updateById(id, nohupRequest.getCommand(), nohupRequest.getParameters(), nohupRequest.getAlias());
             nohupResponse.setProcess(nohupProcess);
-            nohupResponse.setStatus("OK");
+            nohupResponse.setStatus(NohupResponse.Status.OK);
         } catch (CommandNotAcceptedException e) {
-            nohupResponse.setStatus(String.format("KO - Command not accepted : {}", nohupRequest.getCommand()));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Command not accepted : {}", nohupRequest.getCommand()));
+            LOGGER.error(String.format("KO - Command not accepted : {}", nohupRequest.getCommand()));
         } catch (AliasNotAcceptedException e) {
-            nohupResponse.setStatus(String.format("KO - Alias not accepted : {}", nohupRequest.getAlias()));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Alias not accepted : {}", nohupRequest.getAlias()));
+            LOGGER.error(String.format("KO - Alias not accepted : {}", nohupRequest.getAlias()));
         } catch (AliasAlreadyUsedException e) {
-            nohupResponse.setStatus(String.format("KO - Alias already used : {}", nohupRequest.getAlias()));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Alias already used : {}", nohupRequest.getAlias()));
+            LOGGER.error(String.format("KO - Alias already used : {}", nohupRequest.getAlias()));
         } catch (ProcessNotFoundException e) {
-            nohupResponse.setStatus(String.format("KO - Process not found : {}", id));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Process not found : {}", id));
+            LOGGER.error(String.format("KO - Process not found : {}", id));
         }
 
         LOGGER.info("OK - update process = {}", nohupResponse.toString());
@@ -177,10 +192,12 @@ public class NohupController {
 
         try {
             process = nohupService.deleteById(id);
-            nohupResponse.setStatus("OK");
+            nohupResponse.setStatus(NohupResponse.Status.OK);
             nohupResponse.setProcess(process);
         } catch (ProcessNotFoundException e) {
-            nohupResponse.setStatus(String.format("KO - Process not found : {}", id));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Process not found : {}", id));
+            LOGGER.error(String.format("KO - Process not found : {}", id));
         }
 
         LOGGER.info("OK - delete process = {}", nohupResponse.toString());
@@ -202,13 +219,15 @@ public class NohupController {
 
         try {
             process = nohupService.killById(id);
-            nohupResponse.setStatus("OK");
+            nohupResponse.setStatus(NohupResponse.Status.OK);
             nohupResponse.setProcess(process);
         } catch (ProcessNotFoundException e) {
-            nohupResponse.setStatus(String.format("KO - Process not found : %s", id));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Process not found : %s", id));
             LOGGER.error(String.format("KO - Process not found : %s", id), e);
         } catch (FailedKillException e) {
-            nohupResponse.setStatus(String.format("KO - Failed to kill process : %s", process.toString()));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Failed to kill process : %s", process.toString()));
             LOGGER.error(String.format("KO - Failed to kill process : %s", process.toString()), e);
         }
 
@@ -231,13 +250,15 @@ public class NohupController {
 
         try {
             process = nohupService.restartById(id);
-            nohupResponse.setStatus("OK");
+            nohupResponse.setStatus(NohupResponse.Status.OK);
             nohupResponse.setProcess(process);
         } catch (ProcessNotFoundException e) {
-            nohupResponse.setStatus(String.format("KO - Process not found : %s", id));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Process not found : %s", id));
             LOGGER.error(String.format("KO - Process not found : %s", id), e);
         } catch (FailedRunProcessException e) {
-            nohupResponse.setStatus(String.format("KO - Failed to restart process : %s", id));
+            nohupResponse.setStatus(NohupResponse.Status.KO);
+            nohupResponse.setMessage(String.format("Failed to restart process : %s", id));
             LOGGER.error(String.format("KO - Failed to restart process : %s", id), e);
         }
 
@@ -245,6 +266,5 @@ public class NohupController {
 
         return nohupResponse;
     }
-
 
 }
