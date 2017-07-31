@@ -4,9 +4,12 @@ import nohup.exceptions.*;
 import nohup.model.NohupProcess;
 import nohup.model.NohupRequest;
 import nohup.model.NohupResponse;
+import nohup.services.NohupMonitoring;
 import nohup.services.NohupService;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -24,6 +27,9 @@ public class NohupController {
     @Resource
     private NohupService nohupService;
 
+    @Resource
+    private NohupMonitoring nohupMonitoring;
+
     /**
      * TODO Documentation
      * @param nohupRequest
@@ -35,12 +41,13 @@ public class NohupController {
         LOGGER.info(nohupRequest.toString());
 
         NohupResponse nohupResponse = new NohupResponse();
-        NohupProcess nohupProcess;
+        NohupProcess nohupProcess = null;
 
         try {
             nohupProcess = nohupService.create(nohupRequest.getCommand(), nohupRequest.getParameters(), nohupRequest.getAlias());
             nohupResponse.setStatus(NohupResponse.Status.OK);
             nohupResponse.setProcess(nohupProcess);
+            LOGGER.info("OK - create new process = {}", nohupResponse.toString());
         } catch (FailedRunProcessException e) {
             nohupResponse.setStatus(NohupResponse.Status.KO);
             nohupResponse.setMessage("Failed to run new process");
@@ -59,7 +66,7 @@ public class NohupController {
             LOGGER.error(String.format("KO - Alias already used : {}", nohupRequest.getAlias()));
         }
 
-        LOGGER.info("OK - create new process = {}", nohupResponse.toString());
+        nohupMonitoring.monitor(new DateTime(), "id", nohupResponse.getMessage(), "nohupNew", nohupResponse.getStatus(), nohupRequest);
 
         return nohupResponse ;
     }

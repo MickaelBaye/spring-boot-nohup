@@ -14,6 +14,22 @@
             <pattern>%d{HH:mm:ss.SSS}  %-5level %-4relative --- [%thread] %logger{35} : %msg%n</pattern>
         </encoder>
     </appender>
+    <appender name="MONITORING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/nohup-monitoring.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/nohup-monitoring.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- keep 30 days' worth of history capped at 3GB total size -->
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS}  %-5level %-4relative --- [%thread] %logger{35} : %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="nohup.services.NohupMonitoring" level="DEBUG">
+        <appender-ref ref="MONITORING"/>
+    </logger>
     <logger name="nohup" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>

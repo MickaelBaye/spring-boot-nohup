@@ -14,7 +14,6 @@
 
     <properties>
         <jackson-dataformat-xml.version>2.6.3</jackson-dataformat-xml.version>
-        <logback-classic.version>1.0.13</logback-classic.version>
     </properties>
 
     <dependencies>
@@ -23,11 +22,6 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>${jackson-dataformat-xml.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback-classic.version}</version>
         </dependency>
     </dependencies>
 
