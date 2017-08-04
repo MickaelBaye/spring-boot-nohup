@@ -1,25 +1,64 @@
 package nohup.model;
 
 import org.joda.time.DateTime;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * TODO documentation
  * Created by mibaye on 31/07/2017.
  */
+@Document(indexName = "nohup", type = "trace")
 public class NohupMonitoringTrace {
 
-    private DateTime dateTime;
+    @Id
+    private Long id;
+    @Field(type = FieldType.Date)
+    private Date dateTime;
+    @Field(type = FieldType.keyword)
     private String messageId;
+    @Field(type = FieldType.text)
     private String message;
+    @Field(type = FieldType.keyword)
     private String endpoint;
+    @Field(type = FieldType.keyword)
     private NohupResponse.Status status;
+    @Field(type = FieldType.Nested)
     private NohupRequest nohupRequest;
+
+    /**
+     * Default constructor
+     */
+    public NohupMonitoringTrace() {
+        this.id = System.currentTimeMillis();
+    }
+
+    /**
+     * TODO Documentation
+     * @return
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * TODO documentation
+     * @param id
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * TODO documentation
      * @return
      */
-    public DateTime getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
@@ -27,7 +66,7 @@ public class NohupMonitoringTrace {
      * TODO documentation
      * @param dateTime
      */
-    public void setDateTime(DateTime dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 

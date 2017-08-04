@@ -13,23 +13,63 @@
     <name>Nohup Monitoring</name>
 
     <properties>
-        <spring.version>4.3.10.RELEASE</spring.version>
+        <spring.version>5.0.0.RC3</spring.version>
+        <spring-data-elasticsearch.version>3.0.0.RC2</spring-data-elasticsearch.version>
+        <!--<elasticsearch.version>5.5.0</elasticsearch.version>-->
+        <junit.version>4.12</junit.version>
+        <jackson-dataformat-xml.version>2.6.3</jackson-dataformat-xml.version>
     </properties>
 
     <dependencies>
-        <!--Nohup-->
+        <!-- Nohup -->
         <dependency>
             <groupId>com.personal</groupId>
             <artifactId>nohup-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!--Utils-->
+        <!-- Utils -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-elasticsearch</artifactId>
+            <version>${spring-data-elasticsearch.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>${jackson-dataformat-xml.version}</version>
+        </dependency>
+        <!-- Tests -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>spring-libs-snapshot</id>
+            <name>Spring Snapshot Repository</name>
+            <url>http://repo.spring.io/libs-snapshot</url>
+        </repository>
+    </repositories>
 
 </project>
