@@ -13,12 +13,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * TODO documentation
- * Created by mibaye on 01/08/2017.
+ * Created by mibaye on 04/08/2017.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-context.xml"})
-public class NohupMonitoringTest {
+public class NohupServiceTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NohupMonitoring.class);
 
@@ -26,7 +25,7 @@ public class NohupMonitoringTest {
     private ElasticsearchTemplate template;
 
     @Autowired
-    private NohupMonitoring nohupMonitoring;
+    private NohupService service;
 
     @Before
     public void before() {
@@ -36,8 +35,7 @@ public class NohupMonitoringTest {
     }
 
     @Test
-    public void testNohupMonitoringServiceIsNotNull() throws Exception {
-        Assert.assertNotNull(nohupMonitoring);
+    public void testNohupServiceIsNotNull() throws Exception {
+        Assert.assertNotNull(service);
     }
-
 }

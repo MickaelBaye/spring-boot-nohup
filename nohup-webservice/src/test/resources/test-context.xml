@@ -20,5 +20,6 @@
     <elasticsearch:repositories base-package="nohup.repositories" />
 
     <bean name="nohupMonitoring" class="nohup.services.NohupMonitoring" />
+    <bean name="nohupService" class="nohup.services.NohupService" />
 
 </beans>

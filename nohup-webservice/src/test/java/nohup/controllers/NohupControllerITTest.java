@@ -1,5 +1,6 @@
-package nohup;
+package nohup.controllers;
 
+import nohup.Application;
 import nohup.model.NohupMonitoringTrace;
 import nohup.model.NohupRequest;
 import org.junit.Assert;
